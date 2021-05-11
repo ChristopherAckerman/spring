@@ -1,0 +1,6 @@
+\input{../../../hw_preamble.tex}
+\usepackage[space]{grffile}
+
+\title{203C HW1}
+\author{Christopher Ackerman}
+\date{\today}

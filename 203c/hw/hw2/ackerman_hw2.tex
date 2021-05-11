@@ -1,0 +1,113 @@
+\input{../../../hw_preamble.tex}
+\usepackage[space]{grffile}
+
+\title{203C HW1}
+\author{Christopher Ackerman}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Question 1}
+\begin{enumerate}
+\item No, this vector isn't identified. In order to identify the entire vector we need to identify each element. We can't identify $h$ within $H$ because we don't see observations on the entire domain $\R$, so we can't identify the vector.
+
+\item Nothing is identified in this case. Denote true values with a $\ast$, and consider
+  \begin{align*}
+    \tilde{h}(x) &= c h^\ast(x)\\
+    \tilde{\mu} &= c \mu^\ast \\
+    \tilde{\sigma}^2 &= c^2 \sigma^{\ast 2}\\
+    c &> 0\\
+    \p(Y = 1 \mid X = x; \tilde{\mu} \tilde{\sigma}^, \tilde{h}) &= \Phi \left(\frac{\tilde{h}(x) - \tilde{\mu}}{\sqrt{\tilde{\sigma}^2}}\right)\\
+                 &= \Phi \left(\frac{h^\ast(x) - \mu^\ast}{\sqrt{\sigma^{\ast 2}}}\right)\\
+    &= \p(Y = 1 \mid X= x; \mu^\ast, \sigma^{\ast 2}, h^\ast)
+  \end{align*}
+\item With this normalization, we can write
+  \begin{align*}
+    \p(Y = 1 \mid X = x) &= \Phi ( h(x)) \\
+    \implies h(x) &= \Phi^{-1}(\p(Y = 1 \mid X = x))
+  \end{align*}
+  Now $h(x)$ is identified in $H_x$, but it is not identified in $H$ because there are infinitely many points in $\R$ (e.g. $x = 6$) where the value of $h(x)$ could be different.
+\item Plugging in this functional form to the result in the last part,
+  \begin{align*}
+    \alpha + \beta x &= \Phi^{-1}(\p (Y = 1 \mid X = x))
+  \end{align*}
+  We can pin down values for $\alpha$ and $\beta$ as
+  \begin{align*}
+    \alpha &= \E(Y \mid X = 0)\\
+    \beta &= \E(Y \mid X = 1) - \E(Y \mid X = 0)
+  \end{align*}
+  Since $x= 0$ and $x = 1$ are in the support of both $H$ and $H_X$, we have identification within both sets.
+\end{enumerate}
+\section{Question 2}
+\begin{enumerate}
+\item
+  \begin{align*}
+    \p(Y = 1 \mid X = x) &= \p(\varepsilon \le x^\prime \beta \mid X = x)\\
+                         &= \p \left(z \le \frac{x^\prime \beta - \mu}{\sqrt{s^2(x)}} \mid X = x \right)\\
+    &= \Phi \left(\frac{x^\prime \beta - \mu}{\sqrt{s^2(x)}}\right)
+  \end{align*}
+
+\item No, $\beta$ is not identified. Take
+  \begin{align*}
+    \tilde{\beta} &\equiv c \beta^\ast \\
+    \tilde{\mu} &\equiv c \mu^\ast \\
+    \tilde{s}^2(x) &\equiv c^2 s^{\ast 2}(x)\\
+    \p(Y = 1 \mid X = x; \tilde{\beta}, \tilde{\mu}, \tilde{s}) &= \Phi \left(\frac{x^\prime \tilde{\beta} - \tilde{\mu}}{\sqrt{\tilde{s}^2(x)}}\right)\\
+                  &= \Phi \left(\frac{x^\prime \beta^\ast - \mu^\ast}{\sqrt{s^{\ast 2}(x)}}\right)\\
+    &= \p (Y = 1 \mid X = x; \beta^\ast, \mu^\ast, s^{\ast 2})
+  \end{align*}
+\item We can now write the conditional expectation as
+  \[
+\p(Y = 1 \mid x = x) = \Phi \left(\frac{x_1 + x_2 \beta - \mu}{s^2(x_3)}\right)
+\]
+We can identify $\beta_2$ by differentiation with respect to $x_2$, and we can identify $\sqrt{s^2(x_3)} = |s(x_3)$ by differentiating with respect to $x_1$. So $\beta_2$ is identified, and $s$ is identified if we're willing to assume that $s(x_3) \ge 0$.
+
+\item Yes; we still have identification for both $s$ and $\beta_2$ since the argument in (c) does not depend on the value of $s(0)$.
+
+\item They are both identified. To see that $F_\varepsilon$ is identified, define some $\tilde{F}_\varepsilon$ such that
+  \begin{align*}
+    F_\varepsilon^\ast (x_1 + v^\ast (x_2)) &= \tilde{F}_\varepsilon (x_1 + \tilde{v}(x_2))\quad \forall x\\
+    \intertext{If we look at $x_2 = 0$, }
+    F_\varepsilon^\ast (x_1) &= \tilde{F}_\varepsilon (x_1),\\
+    \intertext{so $F_\varepsilon$ is identified. Now if we look at $x_1 = 0$,}
+    F_\varepsilon (v^\ast(x_2)) &= F_\varepsilon(\tilde{v}(x_2)) \quad \forall x
+  \end{align*}
+  $F_\varepsilon$ is strictly increasing so we can take its inverse, and therefore $v$ is identified.
+
+  \item The answer is still the same since we have the normalization/known value $h(\overline{x} = \alpha$. We would only have to change the argument if we didn't know this value.
+\end{enumerate}
+\section{Question 3}
+\begin{enumerate}
+\item
+  \begin{align*}
+    \E(Y \mid X = x) &= \p (Y = 1 \mid X = x) - (1 - \p(Y = 1 \mid X = x))\\
+    &= 2 \p(Y = 1 \mid X = x) - 1
+  \end{align*}
+\item
+  \begin{align*}
+    \p(Y = 1 \mid X = x) &= \p(\varepsilon \le v(x_1) - v(x_2) \mid X = x)\\
+                         &= F_{\varepsilon \mid X = x} (v(x_1) - v(x_2))\\
+    v(x_1) - v(x_2) &= t > 0 \implies \\
+    \p(Y = 1 \mid X = x) &= F_{\varepsilon \mid X = x}(t)\\
+                         &> F_{\varepsilon \mid X = x}(0)\\
+                         &= \frac{1}{2}\\
+    v(x_1) - v(x_2) & =t < 0 \implies \\
+    \p(Y = 1 \mid X =x) &= F_{\varepsilon \mid X = x} (t)\\
+                         &< F_{\varepsilon \mid X = x} (0)\\
+                         &= \frac{1}{2}\\
+    \therefore \p(Y = 1 \mid X_1 = x_1, X_2 = x_2) &\ge \frac{1}{2} \iff v(x_1) \ge v(x_2)
+  \end{align*}
+\item
+  We can define level sets at $V(\overline{x})$ as
+  \begin{align*}
+    S(V)(\overline{x}) &= \{x \mid V(x) \ge V(\overline{x})\}\\
+                       &= \left\{x \mid \p(Y = 1 \mid X_1 = \overline{x}, X_2 = x) \ge \frac{1}{2}\right\}\\
+    S^\prime(V) (\overline{x}) &= \{x \mid V(x) \le V(\overline{x})\}\\
+    &= \left\{x \mid \p (Y = 1 \mid X_1 = x, X_2 = \overline{x}) \le \frac{1}{2} \right\}
+  \end{align*}
+  $V$ is identified when no function in $S$ or $S^\prime$ is an increasing function of another function in that set, and when $V(\overline{x}) = 0$ for some $\overline{x}$.
+
+  \item We can only identify the value of $v$ at a single point $t = v(x_1) - v(x_2)$, so $F_{\varepsilon \mid X = x} (t)$ is not identified.
+\end{enumerate}
+\end{document}

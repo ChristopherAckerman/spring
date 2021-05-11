@@ -1,0 +1,261 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{dsfont}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{changepage}% http://ctan.org/pkg/changepage
+\usetikzlibrary{scopes,calc,arrows}
+\usepackage{setspace}
+\usepackage[makeroom]{cancel}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+\usepackage{wrapfig,lipsum,booktabs}
+\usepackage{hanging}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{dcolumn}
+\usepackage{minted}
+\definecolor{light}{rgb}{0.35, 0.35, 0.35}
+\def\light#1{{\color{light}#1}}
+\usepackage{mathtools}
+
+\title{Assignment 1, Spring 2021\\ \normalsize{ECON 202C}}
+\author{Chris Ackerman, Paige Pearcy, Luna Shen}
+\date{April 11, 2021}
+
+\begin{document}
+	\maketitle
+	
+\section{Numerical exercise on Armington Model}
+For the following 4-country version of the Armington model, assume $\sigma = 5$, $a_{ij}=1$ for all $i,j$, $L_1= L_2 = L_3=L_4=1$, $A_1=1$, $A_2=A_3=A_4=0.5$, and trade costs $\tau_{ij}$ correspond to the $i,j$ element in 
+\[
+\mathcal{T} = 
+\begin{bmatrix}
+1 & 1.3 & 1.4 & 1.2 \\
+1.3 & 1 & 1.3 & 1.2 \\
+1.4 & 1.4 & 1 & 1.3 \\
+1.4 & 1.4 & 1.3 & 1
+\end{bmatrix} 
+\]
+
+\begin{enumerate}
+	\item The equilibrium wages in countries 2, 3 and 4 are
+	\[
+	0.5619, 0.5400, 0.5331.
+	\]
+	
+	\item The trade shares, $\lambda_{ij}$, are
+	\[
+	\begin{bmatrix}
+0.620217734098387 &	0.255577283985955	& 0.175172839223195	& 0.265589014755254 \\
+0.136161205543548 &	0.457697222493548	& 0.147736606723888	& 0.166530093153695 \\
+0.118706532240127 &	0.139709551344339	& 0.494790659680884	& 0.141776504201275 \\
+0.124914528117938 &	0.147015942176159	& 0.182299894372033	& 0.426104387889776 
+	\end{bmatrix}
+	\]
+	
+	\item % Consider (only in this question) that country 2's productivity increases by a factor of 4, from A2 = 0:5 to A0	2 = 2, while the others remain unchanged.
+	\begin{enumerate}
+		\item The welfare in country 2 with the initial parameter values is $0.607890610207557$, and with the new parameter values it is $2.21273016767756$.	
+		
+		\item % What's the change in welfare for country 2 from the productivity shock under	autarky ? (hint: you simply need to use an equation from the lecture and no need	to solve the model)
+		If country 2 is under autarky, then
+		\[W_{2} = \lambda_{22}^{\frac{1}{1-\sigma}}a_{22}^{\frac{1}{1-\sigma}}A_2 = A_2\]
+		Therefore the change in welfare is equal to the change in productivity, $A_{2}-A_{2}^{\prime}$
+		
+		\item %Provide intuition for the difference in your answers in (a) and (b)
+The increase is larger under autarky. When there is trade, the country with the productivity shock continues to consume goods produced in countries that did not experience an increase in productivity (due to their preference for diversity), so the ``effective'' increase in productivity is smaller.
+	\end{enumerate}
+	
+	\item % Consider changes in trade costs so that the new matrix for T' is, Repeat questions 1 and 2. Calculate the change in welfare in each country.
+	Now assume that the matrix for trade costs is given by
+	\[
+    \mathcal{T^\prime} = 
+    \begin{bmatrix}
+    1 & 1 & 1 & 1.2 \\
+    1 & 1 & 1.3 & 1.2 \\
+    1 & 1.4 & 1 & 1.3 \\
+    1 & 1.4 & 1.3 & 1
+    \end{bmatrix} 
+    \]
+    The new wages for countries 2--4 are
+    \[
+    0.554516371140729,	0.543085715012605,	0.549281219715067,
+    \]
+    and the new trade shares are
+        \[
+        \begin{bmatrix}
+0.326147847659487 &	0.493393157494855	& 0.456556718492958	& 0.277286263806797\\
+0.215594185696546 &	0.326148698455949	& 0.105668089724799	& 0.183295111953884\\
+0.234326289727384 &	0.0922757276994401	& 0.328020689580818	& 0.144639339604683\\
+0.223931676916583 &	0.0881824163497557	& 0.109754502201426	& 0.394779284634636
+    \end{bmatrix} 
+    \]
+    Welfare under the new trade costs is
+    \[
+    1.32326361398792,	0.661631375507836,	0.660685377572939,	0.630785084384098
+    \]
+    for countries 1--4. The change in wages for each country is
+    \[
+    1.0000,    1.0133,    0.9942,    0.9706.
+    \]
+    These values are the same regardless of whether we use ``hat algebra'' (the equation for changes) or directly solve the model twice, and then compare results. The advantage to using hat algebra is that it is computationally easier. This model is very small and we can solve it quickly, but for more complicated models the computation time may be an important consideration.
+\end{enumerate}
+
+\inputminted{octave}{Armington_code/Armington.m}
+
+\section{Intermediate Inputs}
+\begin{enumerate}
+    \item 
+    \begin{align*}
+        \max_{L_i, M_i} &\ p_i A_i L_i^\alpha M_i^{1 - \alpha} - w_i L_i - P_i M_i \\
+        p_i \alpha A_i L_i^{1 - \alpha} &= w_i \tag{$L_i$}\\
+        p_i(1 - \alpha) A_i L_i^\alpha M_i^{-\alpha} &= P_i \tag{$M_i$}\\
+        \implies \frac{\alpha}{1 - \alpha} \frac{M_i}{L_i} &= \frac{W_i}{P_i}\\
+        \implies M_i &= \frac{1 - \alpha}{\alpha} L_i \frac{w_i}{p_i}\\
+        p_i &\propto A_i L_i^{\alpha - 1} \left(\frac{1 - \alpha}{\alpha}\right)^{1 - \alpha} L_i^{1 - \alpha} \left(\frac{w_i}{p_i}\right)^{1 - \alpha}\\
+        &= W_i\\
+        &\propto A_i \left(\frac{1 - \alpha}{\alpha}\right)^{1 - \alpha} \left(\frac{w_i}{p_i}\right)^{1 - \alpha}\\
+        \implies p_i &= \frac{1}{\alpha^\alpha(1 - \alpha)^{1 - \alpha}} \frac{w_i^\alpha P_i^{1 - \alpha}}{A_i}\\
+        &= K \frac{w_i^\alpha P_i^{1 - \alpha}}{A_i}
+    \end{align*}
+    \item
+    We can use the first order conditions from the previous part.
+    \begin{align*}
+        \frac{\alpha}{1 - \alpha} \frac{M_i}{L_i} &= \frac{w_i}{P_i}\\
+        \frac{\alpha}{1 - \alpha} ^= \frac{w_i L_i}{P_i M_i}\\
+        w_i L_i + P_i M_i &= Y_i - p_i Q_i\\
+        \implies w_i L_i &= \alpha p_i Q_i\\
+        P_i M_i &= (1 - \alpha) p_i Q_i
+    \end{align*}
+    
+    \item
+    \begin{align*}
+        P_i (C_i + M_i) &= w_i  L_i + P_i M_i\\
+        *= p_i Q_i\\
+        w_i L_i &= \alpha p_i Q_i\\
+        \implies p_i Q_i &= \frac{1}{\alpha} w_i L_i\\
+        P_i (C_i + M_i) &= \frac{1}{\alpha} w_i L_i
+    \end{align*}
+    
+    \item
+    \begin{enumerate} \item
+    \begin{align*}
+        max_{q_{ij}} &\ \left(\sum_{i \in S} a_{ij}^{\frac{1}{\sigma}} q_{ij}^{\frac{\sigma - 1}{\sigma}}\right)^{\frac{\sigma}{\sigma - 1}}\\
+        \text{s.t.} \quad \sum_i p_{ij} q_{ij} &\le p_j Q_j\\
+        \frac{\sigma}{\sigma - 1} \left( \sum_{i \in S} a_{ij}^{\frac{1}{\sigma}} q_{ij}^{\frac{\sigma -1}{\sigma}}\right)^{\frac{1}{\sigma - 1}} \frac{\sigma - 1}{\sigma} a_{ij}^{\frac{1}{\sigma}}q_{ij}^{\frac{-1}{\sigma}} &= \lambda p_{ij} \tag{FOC}\\
+        % \implies \frac{a_{ij}^{\frac{1}{\sigma}}q_{ij}^{-\frac{1}{\sigma}}}{a_{i'j}^{\frac{1}{\sigma}}q_{i'j}^{-\frac{1}{\sigma}}} &= \frac{p_{ij}}{p_{i'j}} \quad \forall i, i'\\
+        % \frac{a_{ij}}{a_{i'j}} &= \frac{p_{ij}^\sigma q_{ij}}{p_{i'j}^\sigma q_{i'j}}\\
+        % p_{ij}q_{ij} &= \frac{a_{ij}}{a_{i'j}} p_{i'j}^\sigma q_{i'j} p_{ij}^{1 - \sigma}\\
+        % \sum_i p_{ij} q_{ij} &= \frac{1}{a_{ij}} p_{i'j}^\sigma q_{i'j} \sum_i a_{ij} p_{ij}^{1 - \sigma}\\
+        Y_j &= \frac{X_{ij}}{w_j L_j}\\
+        &= \frac{a_{ij} Y_j p_i^{\sigma - 1}p_{ij}^{1 - \sigma}}{w_j L_j}\\
+        &= \frac{a_{ij} \frac{1}{\alpha} w_j L_j p_j^{\sigma - 1} (\tau_{ij} p_{ij})^{1 - \sigma}}{w_j L_j}\\
+        &= a_{ij} \tau_{ij}^{1 - \sigma} p_i^{1 - \sigma} \frac{1}{\alpha} p_j^{\sigma - 1}\\
+        &= a_{ij} \tau_{ij}^{1 - \sigma} \left(k \frac{w_i^\alpha p_i^{1 - \alpha}}{A_i}\right)^{1 - \sigma} \frac{1}{\alpha} p_j^{\sigma -1}
+    \end{align*}
+    \item
+    \begin{align*}
+        \lambda_{ii} &= a_{ii} \tau_{ii}^{1 - \sigma} \left(k \frac{w_i^\alpha p_i^{1 - \alpha}}{A_i}\right)^{1 - \sigma} \frac{1}{\alpha} p_i^{\sigma - 1}\\
+        &= a_{ii}\left(\frac{k w_i^\alpha}{A_i}\right)^{1 - \sigma} \frac{1}{\alpha} p_i^{(1 - \sigma) + (\sigma - 1) - \alpha(1 - \sigma)}\\
+        &= \frac{a_ii}{\alpha} \left(\frac{k}{A_i}\right)^{1 - \sigma} \left(\frac{w_i}{P_i}\right)^{\alpha(1 - \sigma)}
+    \end{align*}
+    \end{enumerate}
+    \item
+    \begin{align*}
+        W_i&= \frac{U_i}{L_i}\\
+        &= \frac{w_i L_i}{P_i L_i}\\
+        &= \left(\lambda_{ii} \frac{\alpha}{\alpha_{ii}}\right)^{\frac{1}{\alpha(1 - \sigma)}}\left(\frac{A_i}{k}\right)^{\frac{1}{\alpha}}\\
+        \implies \frac{W_i}{W_i^A}&= \frac{\left(\lambda_ii \frac{\alpha}{a_ii}\right)^{\frac{1}{\alpha(1 - \sigma)}}\left(\frac{A_i}{k}\right)^{\frac{1}{\alpha}}}{\left(1 \cdot \frac{\alpha}{a_ii}\right)^{\frac{1}{\alpha(1 - \sigma)}} \left(\frac{A_i}{k}\right)^{\frac{1}{\alpha}}}\\
+        &= \lambda_ii^{\frac{1}{\alpha (1 - \sigma)}}
+    \end{align*}
+    As $\alpha$ increases, $\frac{1}{\alpha(1 - \sigma)}$ decreases, so $\frac{W_i}{W_i^A}$ decreases and the gains from trade decrease. When $\alpha$ is closer to 1 intermediate goods are less helpful for production, so there is a smaller loss from transitioning to autarky because the lost intermediate goods have a smaller impact on welfare.
+\end{enumerate}
+
+\section{Tariffs}
+\begin{enumerate}
+    \item From the logic in the notes, we can start by setting the price in country $i$ equal to marginal cost,
+    \[
+    p_i = \frac{w_i}{A_i}.
+    \]
+    When a person in country $j$ wants to buy this good, they have to pay the price for the good, plus the per-unit tariff $\tau_{ij} - 1$, so the price of good $i$ in country $j$ is
+    \[
+    p_{ij} = \tau_{ij} \frac{w_i}{A_i}.
+    \]
+    \item
+    \begin{align*}
+        p_{ii} &= \frac{p_{ij}}{\tau_{ij}}\\
+        p_{ij} &= \tau_{ij} \frac{w_i}{A_i}\\
+        \sum_i p_{ij} q_{ij} &= w_j L_j + R_j\\
+        &= w_j L_j + \sum_i (\tau_{ij} - 1) p_{ii} q_{ij}\\
+        &= w_j L_j + \sum_i (\tau_{ij} - 1) \frac{p_{ij}}{\tau_{ij}} q_{ij}\\
+        \sum_i p_{ij} q_{ij} &= w_j L_j + \sum_i p_{ij} q_{ij} - \sum_i \frac{p_{ij} q_{ij}}{\tau_{ij}}\\
+        \sum_i \frac{p_{ij} q_{ij}}{\tau_{ij}} &= w_j L_j
+    \end{align*}
+    
+    \item Using our expressions for $P_{j} = \left(\sum_{j}\left(\frac{\tau_{ij}w_{j}}{A_j}\right)^{1-\sigma}\right)$ and $p_{ij} = \frac{w_i\tau_{ij}}{A_{i}}$, we can rewrite
+    \[
+    X_{ij} = p_{ij}q_{ij} = a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}Y_{j}P_{j}^{\sigma-1} = \frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}Y_{j}
+    \]
+    Therefore, the bilateral expenditure share is given by the expression
+    \[
+    \lambda_{ij} = \frac{X_{ij}}{Y_j} =  \frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}
+    \]
+    
+    
+    \item Using the labor market clearing condition, $Y_i = w_i L_i+R_i$, we can rewrite
+    \[
+		X_{ij} = \frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}Y_{j} = \frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}(w_jL_j+R_j)
+	\]
+	Then, using the goods market clearing condition, $Y_i = \sum_{j \in S}X_{ij}$, we let
+	\begin{gather*}
+		Y_i = \sum_{j \in S}X_{ij} = \sum_{j \in S}\frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}(w_jL_j+R_j)\\
+		\Rightarrow w_iL_i+R_i = \sum_{j \in S}\frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}(w_jL_j+R_j)
+	\end{gather*}
+	Using our expression for $\lambda_{ij} =  \frac{a_{ij}\tau_{ij}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}}{\sum_{k}a_{kj}\tau_{kj}^{1-\sigma}\left(\frac{w_k}{A_k}\right)^{1-\sigma}}$, we  see that the labor market clearing condition can be written as
+		\[
+		w_iL_i+R_i = \sum_{j \in S} \lambda_{ij}(wjL_j+R_j)
+		\]
+		
+	\item Define $r_{i} = \frac{R_{i}}{E_i}$ where $E_{i}$ is total expenditure. The total expenditure of country $i$ is given by $E_i = Y_i $, where $R_i = r_i Y_i$. So we see that $Y_i = w_iL_i+R_i= \frac{w_iL_i}{1-r_i}$. Notice that
+	\begin{gather*}
+		r_{i} = \frac{R_{i}}{E_i} = \frac{R_{i}}{Y_i}\\
+		\Rightarrow \frac{w_iL_i}{Y_i} = 1-r_i\\
+		\Rightarrow \frac{R_i}{w_{i}L_{i}} = \frac{r_i}{1-r_i}
+	\end{gather*}
+	Thus we can derive an expression for welfare, 
+	\[
+		W_{i} = \frac{Y_{i}}{L_{i}P_{i}} = \frac{w_{i}L_{i}}{(1-r_{i})L_{i}P_{i}}=\frac{w_{i}}{(1-r_{i})P_{i}}
+	\]
+	
+	Additionally, given our expression for $\lambda$ and the assumption that $\tau_{ii}=1$, we can rewrite 
+	\begin{gather*}
+		\lambda_{ii} = a_{ii}\tau_{ii}^{1-\sigma}\left(\frac{w_i}{A_i}\right)^{1-\sigma}P_{j}^{\sigma-1}\\
+		\Rightarrow \frac{w_{i}}{P_{i}} = \left(\frac{\lambda_{ii}A_i^{1-\sigma}}{a_{ii}}\right)^{\frac{1}{1-\sigma}}\\
+	\end{gather*}
+	Therefore, the expression for welfare can be written as
+	\begin{gather*}
+		W_{i} = \frac{1}{1-r_{i}}\left(\frac{w_{i}}{P_{i}}\right)= \frac{\lambda_{ii}^{\frac{1}{1-\sigma}}a_{ii}^{\frac{1}{\sigma-1}}A_{i}}{1-r_{i}}
+	\end{gather*}
+	Under autarky, $\lambda_{ii}=1$, so assuming constant values of $a_{ii}$ and $A_{i}$, the gains from trade are
+	\[
+		\frac{W_{i}^{A}}{W_{i}} =  \frac{a_{ii}^{\frac{1}{\sigma-1}}A_{i}}{\lambda_{ii}^{\frac{1}{1-\sigma}}a_{ii}^{\frac{1}{\sigma-1}}A_{i}(1-r_{i})^{-1}} = (1-r_{i})\lambda_{ii}^{\frac{1}{\sigma-1}}
+	\]
+		
+	The expression for welfare under iceberg costs is $W_{i}^{I} = \lambda_{ii}^{\frac{1}{1-\sigma}}a_{ii}^{\frac{1}{\sigma-1}}A_{i}$, so assuming constant values of $a_{ii}$ and $A_{i}$, the gains from trade are
+	\[
+		\frac{W_{i}^{A}}{W_{i}^{I}} = \lambda_{ii}^{\frac{1}{\sigma-1}}
+	\]
+\end{enumerate}
+
+\end{document}

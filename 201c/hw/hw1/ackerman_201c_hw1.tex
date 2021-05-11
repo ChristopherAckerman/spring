@@ -1,0 +1,146 @@
+\input{../../../hw_preamble.tex}
+
+\title{201C HW1}
+\author{Christopher Ackerman \thanks{I worked on this homework with Paige Pearcy and Luna Shen.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Question 1}
+\begin{enumerate}[label=\alph*)]
+\item
+  \begin{align*}
+    \max_{x_1, x_2} &\ t_1 + t_2 + (v_1 - t_1) + (v_2 - t_2)\\
+    1 - x_i + \alpha &= 0 \tag{FOC for $i$}\\
+    \implies x_i &= 1 + \alpha \quad i \in\{1, 2\}
+  \end{align*}
+\item
+  \begin{align*}
+    \max_{t_1, t_2, x_1, x_2} &\ t_1 + t_2\\
+    \text{s.t. } x_i - \frac{1}{2} x_i^2 + \alpha x_j - t_1 &\ge 0 \quad i \in \{1, 2\} \tag{IR}\\
+    \equiv \max_{x_1, x_2} &\ \left(x_1 - \frac{1}{2} x_1^2 + \alpha x_2\right) + \left(x_2 - \frac{1}{2}x_2^2 + \alpha x_1\right)\\
+    1 - x_1 + \alpha &= 0 \tag{FOC for $i$}\\
+    \implies x_i &= 1 + \alpha \quad i \in \{1, 2\}
+  \end{align*}
+\item
+  If both agents accept, everything is the same as in part (b). If only one agent accepts, then the principal solves the problem
+  \begin{align*}
+    \max_{x_i}&\ t_i\\
+    \text{s.t. } x_i - \frac{1}{2}x_i^2 + \alpha x_{-i} - t_i &\ge \alpha x_{-i}\\
+    \equiv \max_{x_i}&\ x_i - \frac{1}{2}x_i^2\\
+    \implies x_i = 1\\
+    \implies t = \frac{1}{2}
+  \end{align*}
+  The agents are better off if they accept the contract, so they both accept the contract the principal has offered.
+
+\item
+  \textbf{Multilateral Contracts.}
+  For multilateral contracts, investment increases with $\alpha$. Each agent can cancel \emph{both} contracts, so they can prevent the principal from undertaking projects that exert too high an externality on them. Thus the principal must account for the effects of externalities on each agent when offering contracts. If the externality is positive, then each agent will exert more effort for a given contract.
+
+  \textbf{Bilateral Contracts.}
+  With bilateral contracts, the level of investment does not depend on $\alpha$.
+
+\item
+  \textbf{Multilateral Contracts.}
+  \begin{align*}
+    \pi &= 2 \left((1 + \alpha) - \frac{1}{2}(1 + \alpha)^2 + \alpha (1 + \alpha)\right)\\
+    &= (1 + \alpha)^2
+  \end{align*}
+  Profits increase with $\alpha$ under multilateral contracts. When agents exert a negative externality, the principal must pay them more to produce; when agents exert a positive externality then the principal can pay them less, since the externality increases their utility ``for free''.
+
+  \textbf{Bilateral Contracts.}
+  Profits don't depend on $\alpha$ when the principal offers bilateral contracts.
+\end{enumerate}
+\section{Question 2}
+\begin{enumerate}[label=\alph*)]
+\item  
+  \begin{align*}
+    \max_{a, w(q)}&\ \E[q - w \mid q]\\
+    \text{s.t. } \E[u(w(q)) - c(a) \mid a] &\ge \overline{u}\\
+    \mathcal{L} &= \int q - w(q) dF(q \mid a) + \lambda \left(\int u (w(q)) - c(a) - \overline{u} dF(q \mid a)\right)\\
+    \max_{q} \mathcal{L} &\equiv \max_{w(q)} (q - w(q)) dF(q \mid a) + \lambda (u(w(q)) - c(a))dF(q \mid a )\\
+    -w(q) + \lambda u (w(q)) &= 0 \tag{pointwise FOC for $w(q)$}\\
+    \implies w(q) &= \lambda u(w(q)\\
+    \E[q \mid a^\ast] &= \lambda c(a^\ast) \tag{FOC for $a$}\\
+                  &= q^\ast\\
+    \E[u(w^\ast) - c(a^\ast) \mid a^\ast] &= \overline{u}\\
+    \implies u(w^\ast) &= \overline{u} + c(a^\ast)\\
+    w^\ast &= u^{-1} (\overline{u} + c(a^\ast))\\
+    \Pi^\ast &= \E[q \mid a^\ast] - w^\ast\\
+    &= \lambda c(a^\ast) - u^{-1} (\overline{u} + c(a^\ast))\\
+    \E[q \mid a^\ast] &= \frac{\lambda c(a^\ast)}{\lambda u^\prime (w^\ast)}\\
+    &= \frac{c(a^\ast)}{u^\prime(u^{-1}(\overline{u} + c(a^\ast)))}
+  \end{align*}
+\item
+  The principal will buy back the firm whenever it is profitable. When the agent owns the firm, there is no moral hazard problem so she exert $a^\ast$ effort and receives profits $\Pi^\ast$. If the agent ever exerts effort $a^\prime > a^\ast$, then the principal will exercise his option.
+
+  \item Assume the agent has already bought the firm, and is now choosing how much effort to exert. Since they own the firm, clearly any $a^\prime < a^\ast$ is not optimal, since $a^\prime$ is the first-best effort $a^\ast$ and in this case there is no moral hazard problem. Now consider a deviation to $a^\prime > a^\ast$. This increases expected output, $E[q \mid a^\prime] > E[q \mid a^\ast]$. But now the principal exercises his option. Since the agent is risk averse and faces a convex cost of effort, $q^\ast - c(a^\prime) < a^\ast$, so the agent does not want to make this deviation, either. The choice of $a^\ast$ pins down the agent's utility at $\overline{u}$ from part (a).
+\end{enumerate}
+\section{Question 3}
+\begin{enumerate}[label=\alph*)]
+\item We can use the MGF for this problem.
+  \begin{align*}
+    \overline{w} &= u^{-1}(\E[u(w)])\\
+                 &= -\log (-\E[-e^{-w}])\\
+                 &= -\log(e^{-\mu}e^{\frac{1}{2} \sigma^2})\\
+                 &= -\log (e^{- \mu + \frac{1}{2}\sigma^2})\\
+    &= \mu - \frac{1}{2}\sigma^2
+  \end{align*}
+\item
+  \begin{align*}
+    \max_{a^\prime} \E[u(w(q) - c(a^\prime)) \mid a^\prime] &= \max_{a^\prime} u\left(\alpha + \beta a^\prime - c(a^\prime) - \frac{\beta^2 \sigma^2}{2}\right)\\
+                                                &\equiv \max_{a^\prime} - \exp \left(-\alpha - \beta a^\prime + c(a^\prime) + \frac{\beta^2 \sigma^2}{2}\right)\\
+    0 &= - (- \beta + c^\prime(a)) \exp\left(-\alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right)  \tag{FOC}\\
+    \implies \beta &= c^\prime(a)\\
+    \intertext{Now set up the Lagrangian.}
+    \mathcal{L} &= \E[q - w(q)] + \lambda \left[\E[u(w(q) - c(a)) \mid a] - u(0)\right] + \mu(\beta - c^\prime (a))\\
+                                                            &= \E[a + x - \alpha - \beta (a + x)] + \lambda[-\exp\left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right) + 1] + \mu [\beta - c^\prime(a)] \\
+                                                            &= a - \alpha - \beta a - \beta \E[x] - \lambda \exp\left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right) + \mu[\beta - c^\prime(a)]\\
+    \intertext{Now take FOCs.}
+    0 &= 1 - \beta - \lambda (-\beta + c^\prime(a)) \exp \left(-\alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right) - \mu c^{\prime \prime} (a) \tag{$a$}\\
+    \implies 1 - \beta &= \mu c^{\prime \prime} (a) \\
+    0 &= -a - \lambda(-a + \beta \sigma^2) \exp\left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right) + \mu \tag{$\beta$} \\
+    \implies \mu &= a + \lambda(-a + \beta \sigma^2) \exp\left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right)\\
+    0 &= -1 + \lambda \exp \left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right) \tag{$\alpha$}\\
+    \implies 1 &= \lambda \exp \left(- \alpha  - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right)\\
+    a + (-a + \beta \sigma^2) &= \beta \sigma^2\\
+                                                            &= \mu\\
+    1 - \beta &= \beta \sigma^2 c^{\prime \prime}(a)\\
+    \implies 1 - c^\prime (a) &= c^\prime (a) \sigma^2 c^{\prime \prime} (a)\\
+    \implies c^{\prime \prime} &= \frac{1 - c^\prime (a)}{c^\prime (a) \sigma^2}\\
+    \beta &= c^\prime (a)\\
+    1 = \exp \left(- \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\right)\\
+    \implies 0 &= - \alpha - \beta a + c(a) + \frac{\beta^2 \sigma^2}{2}\\
+    \alpha &= -\beta a + c(a) + \frac{\beta^2 \sigma^2}{2}
+  \end{align*}
+\end{enumerate}
+\section{Question 4}
+\begin{enumerate}[label=\alph*)]
+\item We need to check that $a_i = H \in BR_i$. We know that $w_L^i = 0$ since we don't want to reward behavior that doesn't benefit the principal, so we'll use this to simplify the problem. The principal solves
+  \begin{align*}
+    \min_{w_H^i} w_H^1 p(2) \\
+    \text{s.t. } w_H^i p(2) - c &\ge w_H^i p(1) \quad i \in \{1, 2\}\\
+    \implies w_H^i &\ge \frac{c}{p(2) - p(1)}
+  \end{align*}
+  The optimal wage for the principal is then
+  \[
+w_H^i = \frac{c}{p(2) - p(1)} \quad i \in \{1, 2\}
+  \]
+\item To avoid existence issues, assume that agents always play $H$ when they are indifferent between two options. The cheapest way to ensure all NE feature high effort from both agents is to make sure that 1 player always plays $H$, and then we know from part (a) the minimum wage required to make the other player want to play $H$. We again have $w_L^i = 0$ for $i \in \{1, \}2$. If we set $w_H$ as
+  \begin{align*}
+    w_H^1 &= \frac{c}{p(1) - p(0)}\\
+    w_H^2 &= \frac{c}{p(2) - p(1)}
+  \end{align*}
+  With these wages, player 1 always wants to play $H$. Knowing this, player 2 will also always want to play $H$.
+\item
+  If we offer the second agent enough to perform the high action, then the first agent knows the second agent will accept, so she is comparing $p(2)$ and $p(0)$. Again assuming that agents choose the high action when they're indifferent, the principal can offer wages
+  \begin{align*}
+    w_H^1 &= \frac{c}{p(2) - p(0)}\\
+    w_H^2 &= \frac{c}{p(2) - p(1)}
+  \end{align*}
+\end{enumerate}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

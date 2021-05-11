@@ -1,0 +1,105 @@
+\input{../../../hw_preamble.tex}
+
+\title{201C HW1}
+\author{Christopher Ackerman \thanks{I worked on this homework with Paige Pearcy and Luna Shen.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+\section{Question 1}
+\begin{enumerate}[label=\alph*)]
+\item 
+  $w_0 = 0$ because we never want to pay more than the outside option. For $w_1$, we want the agent to be just indifferent to $q \in \{L, H\}.$ Let's find the wage offer that makes the expected utility exactly the same.
+  \begin{align*}
+    \E[u \mid a = L] &= 0 \\
+    \E[u \mid a = H] &= p u(w_1) + (1 - p) o - c(H)\\
+    0 &= p u(w_1) - c(H)\\
+    \frac{c(H)}{p} &= u(w_1)\\
+    \implies w_1 &= u^{-1} \left(\frac{c(H)}{p}\right)
+  \end{align*}
+  This makes sense. The wage for high output needs to compensate the agent for his effort, but since high effort doesn't always produce high output and we don't directly observe effort, we need to overweight the compensation for high output to account for times when the agent exerts high effort but doesn't produce high output.
+
+\item Again we have $w_L = 0$, and we want to set $w_H$ such that
+  \[
+\E[ u \mid H] \ge \E[u \mid L].
+\]
+We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the probability of winning given high effort is $\frac{1}{2}$.
+\begin{align*}
+  \E[ w \mid a = H] &= \frac{1}{2} u(w_H) - c(H)\\
+  \E[u \mid a = L] &= \frac{1}{2}(1 - p) w_H\\
+  \intertext{Here the agent has a strictly positive expected utility from exerting effort $L$. If the agent plays $L$, there is a $1 - p$ chance that the other agent fails to produce high output, even if he is playing $H$. Given low output by both players, the principal still needs to pay \emph{somebody} the high wage, and our tie-breaking mechanism assigns this probability $\frac{1}{2}$. Now we can set these expected utilities equal to each other and solve for the optimal high wage.}
+  \frac{1}{2}(1 - p) u(w_H) &= \frac{1}{2} u(w_H) - c(H)\\
+  \implies w_H &= u^{-1} \left(\frac{2c(H)}{p}\right)\\
+  \intertext{To see that profits are lower under tournament pay, note that we can write the firm's profits in each case as}
+  \Pi_a &= q(H, H) - 2w_H - 0 w_L\\
+  \Pi_b &= q(H, H) - w_h - w_L\\
+  \intertext{Both pay schemes result in actions $H, H$ by the agents, so output is the same. In part (a) we pay both agents the high wage, but in part (b) one agent gets the high wage and one agent gets the low wage. Since $w_L = 0 $ in both cases, we can simplify the profit condition to}
+  2 \underbrace{u^{-1}\left(\frac{c(H)}{p}\right)}_{w_H (a)} &< \underbrace{u^{-1} \left(\frac{2c(H)}{p}\right)}_{w_H(b)}\\
+  \intertext{This inequality follows from the mathematical footnote in the problem set.}
+\end{align*}
+\item Again set $w_L = 0$, and suppose $a_{-i} = H$
+  \begin{align*}
+    \p(\text{nobody has } q = 1) &= (1 - p)^2\\
+    \implies \p(\text{at least one person succeeds}) &= 1 - ((1 - p)^2)\\
+                                 &= 2p - p^2\\
+    \E[u \mid a = H] &= u(w_H)(2p - p^2) - c(H)\\
+    \E[u \mid a = L] &= u (p w_H)\\
+    u(w_H(2p-p^2)) - c(H) &= u(p w_H)\\
+    \implies w_H &= u^{-1} \left(\frac{c(H)}{p - \gr{p^2}}\right)\\
+    \intertext{Here the green term is an incentive to deviate to $a = L$ because there is still a chance to receive high wages if the other player exerts high effort, so $w_H$ must be higher to avoid shirking.}
+  \end{align*}
+\item Regardless of whether the NE is $\{H, H\}$ or $\{L, L\}$, each agent will win half of the time.
+  \begin{align*}
+    \E[u_i \mid H, H] &= u\left(\frac{1}{2} w_H\right) - u\left(\frac{1}{2} w_L\right) - c(H)\\
+    \E[u_i \mid L, L] &= u\left(\frac{1}{2} w_H\right) - u\left(\frac{1}{2} w_L\right) - 0
+  \end{align*}
+  The payoffs are the same in both NE, but the costs are higher for $\{H, H\}$, so both players prefer $L, L$ to $H, H$. To show that $\{L, L\}$ is a SPNE, take $\delta = 1$ and assume that both players play Grim trigger strategies; each player plays $L$ as long as the other play plays $L$, but switches to $H$ if the other player switches. All subgames are identical since the game is infinite.
+  \begin{align*}
+    \E[u \mid a_i = \{L\}_{t = 1}^\infty] &= u \left(\sum^\infty_{t = 1} \frac{1}{2} w_H + \frac{1}{2} w_L\right)\\
+    \intertext{Let's check a deviation to $a_i^t = H$ for some $t^\prime < \infty$. Since both players are playing Grim trigger, this means that they'll play $H, H$ for the rest of the game}\\
+    \E[ u \mid a_i = \{H\}_{t = t^\prime}^\infty] &= \underbrace{u\left(p w_h + \frac{1}{2}(1 - p)w_L + \frac{1}{2} (1 - p) w_H\right)}_{\text{this period}} + u\left(\sum^\infty_{t = t^\prime} \frac{1}{2} w_h + \frac{1}{2} w_L\right) - \sum^\infty_{t = t^\prime}c(H)\\
+    \intertext{Let's check if this is a profitable deviation with $\delta = 1$. Agent $i$ does not want to deviate to $H, H$ if and only if}
+    u\left(\sum^\infty_{t = t^\prime} \frac{1}{2} w_H + \frac{1}{2} w_L\right) &> u \left(\sum^\infty_{t = t^\prime} \frac{1}{2} w_H + \frac{1}{2} w_L\right) + u\left(pw_H + \frac{1}{2} (1 - p)w_L + \frac{1}{2} (1 - p) w_H \right) - \sum^\infty_{t = t^\prime} c(H)\\
+    \sum^\infty_{t = t^\prime} c(H) &> u\left(pw_H + \frac{1}{2} (1 - p)w_L + \frac{1}{2} (1 - p) w_H\right) 
+  \end{align*}
+  The undiscounted cost of high effort, the term on the left, is infinite, while the one-period benefit of deviating, the term on the right, is finite. Therefore $L, L$ is a SPNE for each subgame.
+\end{enumerate}
+\newpage
+\section{Question 2}
+\begin{enumerate}[label=\alph*)]
+\item \rd{TODO}
+\item Because there are competitive firms, we want to offer the agent their expected output each period so that expected profits are equal to $0$. In the first period we don't know anything about the agent, so their expected output is their expected type, which is $\frac{1}{2} 0 + \frac{1}{2} 2 = 1$, so $w_1 = 1$. In period $2$, we've seen output in period 1 so we perfectly know the agent's type. Since period 1 output is perfectly revealing about the agent's type, we can now write $w_2(y^1)$ as a function of the agent's type, and the zero-profit condition gives $w_2 = y_2 = \theta$. Therefore, the equilibrium wage offer is
+  \[
+\{1, \theta\}.
+  \]
+\item Here we again want to write a contract based on the agent's type, but the information structure is different. Seeing $y = 4$ is perfectly informative about the agent's type, but seeing $y = 0$ is not. The more we see $y = 0$, the more likely it is that the agent is type $\theta = 0$. Using Bayes rule, we can write $\p(\theta = t \mid y^t)$ as
+  \begin{align*}
+    y^t = \{0\} &\implies \p(\theta = 2) = \frac{1}{3}\\
+    y^t = \{0, 0\} &\implies \p(\theta = 2) = \frac{1}{9}\\
+    y^t = \{0^t\} &\implies \p(\theta = 2) = \frac{1}{3^t}\\
+    \intertext{We can also write expected profits as }
+    \E[\Pi] &= 2 \p (\theta = 2)
+  \end{align*}
+  To write the optimal contract, we can break it into three parts.
+\begin{enumerate}
+  \item
+  Before seeing any output, we offer the unconditional expected output,
+  \begin{align*}
+    \E[y_1] &= \frac{1}{2}(y \mid \theta = 0) + \frac{1}{2} (y \mid \theta = 2)\\
+            &= 0 + \frac{1}{2} \left(\frac{1}{2} \cdot 0 + \frac{1}{2} \cdot 4\right)\\
+            &= 1\\
+    \implies w_1 = 1
+  \end{align*}
+\item If we see output $0$ in the first period, or more generally if we see a vector of zeroes of length $t$, then we start to think that the agent is \emph{probably} type $\theta = 0$, but we can't be sure. So we want to reduce their compensation to account for the increased probability they're low-type. Formally, for any history $s^t$ where $y_t = 0 \forall  t^\prime < t$, we offer the wage
+  \[
+w(y(s^t)) = 2 \cdot \frac{1}{3},
+\]
+where we're again offering expected output, but now discounting it by the probability that the agent is actually high type.
+\item Finally, the observation $y_t = 4$ is perfectly information and unambiguously tells us that $\theta =2$. Therefore, if we see $y = 4$ for some $t^\prime$, then
+  \[
+w(s^t) = 2 \quad \forall t > t^\prime
+  \]
+  \end{enumerate}
+\end{enumerate}
+\end{document}

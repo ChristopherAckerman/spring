@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{textcomp}
+% \usepackage{dsfont}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{changepage}% http://ctan.org/pkg/changepage
+\usetikzlibrary{scopes,calc,arrows}
+\usepackage{setspace}
+\usepackage[makeroom]{cancel}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+\usepackage{wrapfig,lipsum,booktabs}
+\usepackage{hanging}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{dcolumn}
+% \usepackage{minted}
+\definecolor{light}{rgb}{0.35, 0.35, 0.35}
+\def\light#1{{\color{light}#1}}
+\usepackage{mathtools}
+\newcommand{\p}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+
+\title{Econ 203C HW1, Spring 2021}
+% \institution{Econ 202C}
+\author{Chris Ackerman\thanks{I worked on this homework with Paige Pearcy and Luna Shen.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+\section*{Question 1}
+\begin{enumerate}
+\item 
+  \begin{align*}
+    F_{Y \mid X = x} (y, x) &= \p (Y \le y \mid X = x)\\
+                            &= \p ( \varepsilon \le y - g(x) \mid X = x)\\
+                            &= \p \left(\frac{\varepsilon - \mu(x)}{\sqrt{\sigma^2(x)}} \le \frac{y - (g(x) + \mu (x))}{\sqrt{\sigma^2(x)}} \mid X = x\right)\\
+                            &= \Phi \left(\frac{y - (g(x) + \mu (x))}{\sqrt{\sigma^2(x)}}\right)\\
+    Y \mid X &\sim \mathcal{N} (g(x) + \mu (x), \sigma^2 (x))
+  \end{align*}
+\item
+  These results follow from properties of the normal distribution.
+  \begin{align*}
+    \E[Y \mid X = x] &= g(x) + \mu (x)\\
+    \Var (Y \mid X = x) &= \sigma(x)^2
+  \end{align*}
+  \item The distribution function for this model must be a normal distribution whose first and second moments match the values from the previous question. In this case,
+    \begin{align*}
+      m_1(x) &= \int y dF_{Y \mid X = x} (y, x) \tag{first moment}\\
+             &= g(x) + \mu (x)\\
+      m_2(x) &= \int y^2 dF_{Y \mid X = x}(y, x) \tag{second moment}\\
+      &= \sigma^2(x) + (g(x) + \mu(x))^2
+    \end{align*}
+    
+  \item $\mu (x)$ is not identified. To see this, define
+    \begin{align*}
+      g^\ast (x) &\equiv g(x) - c\\
+      \mu^\ast (x) &\equiv \mu (x) + c\\
+      \implies g^\ast(x) + \mu^\ast(x) &= g(x) + \mu(x).
+    \end{align*}
+    $\sigma^2(x) = \Var(Y \mid X = x)$ is identified, because we observe $Y$ and $X$.
+\end{enumerate}
+\section*{Question 2}
+\begin{enumerate}
+\item
+  \begin{align*}
+    F_{Y \mid X = x} (y, x) &= \p(Y \le y \mid X = x)\\
+                            &= \p(\varepsilon \le y - \alpha^\ast \cdot g^\ast (x) \mid X = x)\\
+                            &= \p \left(\frac{\varepsilon - \mu^\ast}{\sqrt{(\sigma^\ast)^2}} \le \frac{y - (\alpha^\ast \cdot g^\ast (x) + \mu^\ast)}{\sqrt{(\sigma^\ast)^2}} \mid X = x\right)\\
+    &= \Phi \left(\frac{y - (\alpha^\ast \cdot g^\ast(x) + \mu^\ast)}{\sqrt{(\sigma^\ast)^2}}\right)
+  \end{align*}
+\item $g^\ast$ is not identified within the class of continuous functions. If it were identified,
+  \[
+\E[Y \mid X = x, \alpha^\ast, g^\ast, \mu^\ast, \sigma^\ast] = \E[Y \mid X =x, \tilde{\alpha}, \tilde{\mu}, \tilde{g}, \tilde{\sigma}] \implies \alpha^\ast g^\ast (x) + \mu^\ast = \tilde{\alpha} \tilde{g} (x) + \tilde{\mu}.
+\]
+To find a counterexample, take
+\begin{align*}
+  \tilde{g}(x) &= g^\ast (x) + c\\
+  \tilde{\alpha} &= \alpha^\ast\\
+  \tilde{\mu} &= \mu^\ast - \alpha^\ast c\\
+  \implies \alpha^\ast g^\ast(x) + \mu^\ast &= \tilde{\alpha} \tilde{g} (x) + \tilde{\mu}\\
+  \tilde{g}(x) &\ne g^\ast (x)
+\end{align*}
+\item By the same reasoning, $\mu^\ast$ is not identified within the set of real numbers. To find a counterexample here, take
+  \begin{align*}
+    \tilde{\mu} &= \mu^\ast - \alpha^\ast t\\
+    \tilde{g} (x) &= g^\ast (x) + t\\
+    \tilde{\alpha} &= \alpha^\ast
+  \end{align*}
+\item \[
+\sigma^\ast = \Var(Y \mid X = x)
+\]
+We observe $Y$ and $X$, so $(\sigma^\ast)^2$ is identified.
+\item With $\alpha^\ast = 1, \mu^\ast = 0$
+  \[
+\E[Y \mid X = x] = g^\ast(x),
+\]
+so $g^\ast$ is identified. $(\sigma^\ast)^2$ is still identified because we still observe $X$ and $Y$.
+\item In this case, $\mu$ is identified but $\alpha$ and $g$ are not. To see that $\mu^\ast$ is identified, consider $\tilde{\alpha}, \tilde{g}(x)$ and $\tilde{\mu}$ such that
+  \[
+\alpha^\ast g^\ast(x) + \mu^\ast = \tilde{\alpha}\tilde{g}(x) + \tilde{\mu}.
+\]
+\begin{align*}
+  \underbrace{\tilde{\alpha}\tilde{g}(\overline{x})}_{0} + \tilde{\mu} &= \underbrace{\alpha^\ast g^\ast(\overline{x})}_0 + \mu^\ast\\
+  \implies \tilde{\mu} &= \mu^\ast,
+\end{align*}
+so $\mu^\ast$ is identified. To see that $\alpha$ and $g$ are not identified, take
+\begin{align*}
+  \tilde{\alpha} &\equiv \frac{1}{c} \alpha^\ast\\
+  \tilde{g} (x) &\equiv g^\ast(x) c
+\end{align*}
+\end{enumerate}
+\end{document}

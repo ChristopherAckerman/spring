@@ -1,0 +1,233 @@
+\input{../../../hw_preamble.tex}
+\usepackage[space]{grffile}
+
+\title{201C HW1}
+\author{Christopher Ackerman, Paige Pearcy and Luna Shen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Question 1}
+\begin{enumerate}
+\item
+  \begin{align*}
+    \text{real wages } &= 2.13723583769062\\
+    \text{shares } &= 0.746333234398518, \	0.253666765601461\\
+    \psi_{11} &= 3.804668623731593\\
+    \psi_{12} &= 4.964546384670792\\
+  \end{align*}
+\item
+  In levels, the new values for these variables are
+  \begin{align*}
+    \text{shares } &= 0.655678294052739, \ 	0.344321705937550\\
+    \text{welfare } &= 2.19331416201789\\
+    \psi_{11} &= 3.904498243503427 \\
+    \psi_{12} &= 4.670242232050884 \\
+    \text{average productivity } &= 6.33849389422222
+  \end{align*}
+  The changes are
+  \begin{align*}
+    \text{domestic share } &= -0.09065494034577892\\
+    &= - 12.146710901711245 \% \\
+    \text{welfare } &=0.056078324327270224\\
+    &= 2.623871607349865 \%\\
+    \psi_{11} &= 0.09982961977183402 \\
+    &= 2.6238716073496517 \% \\
+    \psi_{12} &= - 0.2943041526199055 \\
+    &= - 0.05928117693262754 \% \\
+    \text{average productivity } &= -0.3994321882542593\\
+    &= -5.9281176932628306 \%
+  \end{align*}
+  As trade costs go down, imports become relatively cheaper so each country's domestic expenditure share goes down. Since the domestic good is the same price but the foreign good is cheaper, the real price of goods in the economy is cheaper so welfare increases. The domestic cutoff increases since there is more competition from abroad, and the exporting cutoff decreases because it is now cheaper to export goods.
+
+\item
+  The new values in levels are: 
+  \begin{align*}
+    \lambda_{11} &= 0.731182173029613 \\
+    \text{welfare } &= 2.14602059411968\\
+    \psi_{11} &= 3.82030708840795\\
+    \psi_{12} &= 4.79303024319512 \\
+    \text{average productivity }&= 6.505142864500504 
+  \end{align*}
+  The changes are
+  \begin{align*}
+    \lambda_{11} &= - 0.015151061368904983\\
+                 &= - 2.0300665534632757 \% \\
+    \text{welfare } &= 0.0087847564289798 \\
+                 &= 0.4110335543723676 \% \\
+    \psi_{11} &= 0.015638464676360098 \\
+                 &= 0.4110335543762025 \% \\
+    \psi_{12} &= -0.17151614147569116 \\
+                 &= -3.4548200013859824 \% \\
+    \text{average productivity } &= - 0.23278321797597545 \\
+    &= - 3.4548200013856126 \%
+  \end{align*}
+  The intuition here is exactly the same as in the previous case, since decreasing fixed exporting costs has exactly the same (qualitative) impact as decreasing iceberg trade costs.
+  \begin{minted}{octave}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            MELITZ MODEL
+%  Chang He
+%  April, 14, 2021
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Description: In this file we have some numerical exercises on the
+% Melitz model from the Lecture Notes. 
+% We start with the basic 2-country model. 
+% This script uses the following functions:
+% 1) findeq2country:            This function is required to find the 
+%                               equilibrium in the 2 country model
+% 2) modelcalculations2country: Computes additional measures in the model
+%                               given wages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear;
+% Filling in the parameters
+global ttheta L Tau  ssigma fxc M;
+M      = [100,100]             ;
+ttheta = 5              ;
+L      = [1,1]               ;                                          % Labor Supply
+Tau    = [1,1.2;1.2,1]           ;                                      % Iceberg costs
+fxc     = [0.7, 0.9; 0.9, 0.7]   ;                                          
+ssigma = 4                 ;                                            % Elasticity of substitution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Solving the initial equilibrium
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Initial value for the wage in the second country
+% Note: My initial guess is the same wage as in country 1
+w0          =  0.4                                 ;           
+% Using fsolve to find the equilibrium wage 
+w2          =  fsolve( @(x)findeq2countryMelitz(x),w0) ;
+% Some useful calculations 
+[model_init]=  modelcalculations2countryMelitz(w2)     ;
+% Saving the initial iceberg costs
+Tau0        =  Tau    ;
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Decrease in Icerberg Tradecosts/export costs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tau(1,2)    =  1.2                               ;
+Tau(2,1)    =  Tau(1,2)    ;                      ;
+fxc     = [0.7, 0.8; 0.8, 0.7]   ;  
+w0          =  0.4                                 ;           
+% Using fsolve to find the equilibrium wage 
+w2          =  fsolve( @(x)findeq2countryMelitz(x),w0) ;
+% Some useful calculations 
+[model_end]=  modelcalculations2countryMelitz(w2)     ;
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hat Algebra %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+global lambda0 Yshare0 Khat Lhat
+S = 2;
+Tau1= [1,1.1;1.1,1];
+K0=model_init.K;
+%K1=;
+Yshare0=model_init.Yshare;
+lambda0=model_init.lambda;
+Khat=K0./K0;
+Lhat=1;
+% Initial values
+x0=1;
+% Finding the solution
+w_hat=model_init.wages;
+lambda_hat=model_init.lambda;
+xsol=fsolve(@(x) hatalgebra2countryMelitz(x),x0');
+% lambda_hat=xsol(S:end);
+% lambda_hat=reshape(lambda_hat,S,S);
+% w_hat=[1;xsol(1:S-1)];
+  \end{minted}
+\end{enumerate}
+\section{Question 2}
+\begin{enumerate}
+\item We tried to use the hat algebra code for this, but we couldn't get it to run. We got dimension errors a number of times, along with some other issues.
+  \begin{minted}{octave}
+function ff=hatalgebra2countryMelitz(xvec)
+global lambda0 Yshare0 Khat Lhat ssigma ttheta
+w_hat(1,1)=1;
+w_hat(2,1)=xvec(1);
+lambda_hat=xvec(2:end);
+lambda_hat=reshape(lambda_hat,2,2);
+% Fill in equation 20 in the lecture notes
+% Equilibrium in the labor market
+ff(1)=lambda0(2,1)*Yshare0(1)/Yshare0(2)*lambda_hat(2,1)*w_hat(1,1)*Lhat(1)...
+    +lambda0(2,2)*Yshare0(2)/Yshare0(2)*lambda_hat(2,2)*w_hat(2,1)*Lhat(2)...
+    -w_hat(2,1)*Lhat(2);
+% Fill in numerator and denominator in equation 21
+ind=2;
+for j=1:2
+    for i=1:2
+       Nume(i,j)= Khat(i,j)*w_hat(i)^(1-ssigma*ttheta/(ssigma-1));
+       Deno(i,j)= lambda0(i,j)*Nume(i,j);
+    end
+    Den(j)=sum(Deno(:,j),1);
+    for i=1:2
+        % Equation 22
+       ff(ind)=lambda_hat(i,j)-Nume(i,j)/Den(j);
+       ind=ind+1;
+    end
+end
+end
+  \end{minted}
+  \item When we take away the extensive margin effect, the domestic share $\lambda_{ii}$ is larger and the increase in welfare is smaller than when the domestic and export cutoffs respond to the reduction in trade costs. Allowing previously domestic firms to export (by lowering $\psi_{12}$) increases the foreign share (decreases $\lambda_{ii}$) and increases welfare.
+\end{enumerate}
+
+\section{Question 3}
+\begin{enumerate}
+\item
+  \begin{align*}
+    \intertext{Firm profits are}
+    \pi_i(\omega) &= \sum_j (p_{ij} (\omega) - c_i \tau_{ij})q_{ij} (\omega) - w_i f_i^e\\
+    \intertext{If we express revenues as a markup $\overline{\mu}$ over payments to production labor, we can write profits as }
+    \pi_i (\omega) &= \left(\overline{\mu} - 1\right)x_i^p (\omega) - w_i f_i^e
+  \end{align*}
+  The free entry condition requires that profits in country $i$ are zero because, if not, one of the mass of firms that has not entered the market would start producing at $\pi_i (\omega) > 0$ and increase the quantity, and this process would continue until the quantity of goods produced was such that $\pi_i (\omega) = 0$.
+\item
+  \begin{align*}
+    \intertext{From the firm's profit maximization problem, we know that it follows the pricing rule}
+    p_{ij} (\omega) &= \overline{\mu} c_i \tau_{ij}\\
+    \intertext{Since all firms charge the same price, we can substitute this into the gravity equation to get}
+    X_{ij} &= Y_j P_j^{\sigma - 1} \int_{\Omega_i} (\overline{\mu}c_i \tau_{ij})^{1 - \sigma} d\omega \\
+    \implies X_{ij} &= \overline{\mu}^{1 - \sigma} \tau_{ij}^{1 - \sigma} \left(\frac{w_i}{A_i}\right)^{1 - \sigma} M_i Y_j P_j^{\sigma - 1}\\
+    \intertext{Dividing by $Y_j$ yields}
+    \lambda_{ij} =\frac{X_{ij}}{Y_j} &= \overline{\mu}^{1 - \sigma} \tau_{ij}^{1 - \sigma}\left(\frac{w_i}{A_i}\right)^{1 - \sigma} M_i P_j^{\sigma - 1}\\
+  \end{align*}
+\item
+  \begin{align*}
+    \intertext{We can use the free entry condition to write}
+    w_i f_i^e = (\overline{\mu} - 1) x_i^p (\omega)\\
+    \intertext{We can write the labor market clearing condition for country $i$ as}
+    M_i \left(f_i^e + \frac{x^p_i(\omega)}{w_i}\right) &= L_i\\
+    M_i \left(f_i^e + \frac{f_i^e}{\overline{\mu} - 1}\right)&= L_i\\
+    \implies M_i &= \frac{(\overline{\mu} - 1)L_i}{\overline{\mu} f_i^e}
+  \end{align*}
+  \item
+    \begin{align*}
+     \intertext{Starting with our expression for trade shares, } 
+    \lambda_{ij} =\frac{X_{ij}}{Y_j} &= \overline{\mu}^{1 - \sigma} \tau_{ij}^{1 - \sigma}\left(\frac{w_i}{A_i}\right)^{1 - \sigma} M_i P_j^{\sigma - 1}\\
+      \intertext{we can write}
+      \lambda_{ii} &= \overline{\mu}^{1 - \sigma} \left(\frac{w_i}{P_i}\right)^{1 - \sigma} A_i^{\sigma - 1} \frac{L_i}{f_i^e}\frac{\overline{\mu} - 1}{\overline{\mu}}\\
+      \left(\frac{w_i}{P_i}\right)^{1 - \sigma} &= \lambda_{ii} \overline{\mu}^{\sigma - 1} A_i^{1 - \sigma} \frac{f_i^e}{L_i} \frac{\overline{\mu}}{\overline{\mu} - 1}\\
+      \implies W_i &= \lambda_{ii}^{1/1 - \sigma} A_i \left(\frac{f_i^e}{L_i} \frac{\overline{\mu}^\sigma}{\overline{\mu} - 1}\right)^{1/1 - \sigma}\\
+    \end{align*}
+  \item
+    \begin{align*}
+      \ln \left(\frac{W_i^\prime}{W_i}\right) &= \ln \left(\frac{\lambda_{ii}^{\prime1/1 - \sigma} A_i \left(\frac{f_i^e}{L_i} \frac{\overline{\mu}^\sigma}{\overline{\mu} - 1}\right)^{1/1 - \sigma}}{\lambda_{ii}^{1/1 - \sigma} A_i \left(\frac{f_i^e}{L_i} \frac{\overline{\mu}^\sigma}{\overline{\mu} - 1}\right)^{1/1 - \sigma}}\right)\\
+      &= \ln \left(\left(\frac{\lambda_{ii}^{\prime}}{\lambda_{ii} }\right)^{1/1 - \sigma}\right)
+    \end{align*}
+    This expression only depends on the exogenous change in $\lambda_{ii}$, not on the markup $\overline{\mu}$, so the markup does not impact the change in welfare.
+  \item
+    \[
+W_i = \lambda_{ii}^{1/1 - \sigma} A_i \left(\frac{f_i^e}{L_i} \textcolor{green}{\frac{\overline{\mu}^\sigma}{\overline{\mu} - 1}}\right)^{1/1 - \sigma}
+\]
+The welfare change of moving from $\overline{\mu}$ to $\overline{\mu}^\prime < \overline{\mu}$ depends on the initial location of $\overline{\mu}$. There is some optimal $\mu^\ast$ for the economy, similar to $\frac{\sigma}{\sigma - 1}$ in the monopolistically competitive case. If $\overline{\mu} > \mu^\ast$, then decreasing $\overline{\mu}$ improves welfare. Otherwise decreasing $\overline{\mu}$ reduces welfare. 
+
+\item  The welfare gains from trade increase more or increase less/decrease if reductions in trade costs are accompanied by reductions in markups, compared to the welfare gains from reductions in trade costs alone. Question (5) shows us that welfare increases as a result of reductions in trade costs, but question six shows that welfare can either increase or decrease when markups change.
+\end{enumerate}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:

@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }ff\PYG{p}{=}\PYG{n+nf}{hatalgebra2countryMelitz}\PYG{p}{(}xvec\PYG{p}{)}
+\PYG{k}{global} \PYG{n}{lambda0} \PYG{n}{Yshare0} \PYG{n}{Khat} \PYG{n}{Lhat} \PYG{n}{ssigma} \PYG{n}{ttheta}
+\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)=}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)=}\PYG{n}{xvec}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{=}\PYG{n}{xvec}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{k}{end}\PYG{p}{);}
+\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{=}\PYG{n+nb}{reshape}\PYG{p}{(}\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{c}{\PYGZpc{} Fill in equation 20 in the lecture notes}
+\PYG{c}{\PYGZpc{} Equilibrium in the labor market}
+\PYG{n}{ff}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)=}\PYG{n}{lambda0}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Yshare0}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{/}\PYG{n}{Yshare0}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{*}\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Lhat}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)...}
+    \PYG{o}{+}\PYG{n}{lambda0}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Yshare0}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{/}\PYG{n}{Yshare0}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{*}\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{*}\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Lhat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)...}
+    \PYG{o}{\PYGZhy{}}\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Lhat}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{c}{\PYGZpc{} Fill in numerator and denominator in equation 21}
+\PYG{n}{ind}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{k}{for} \PYG{n}{j}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{2}
+    \PYG{k}{for} \PYG{n}{i}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{2}
+       \PYG{n}{Nume}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)=} \PYG{n}{Khat}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}\PYG{o}{*}\PYG{n}{w\PYGZus{}hat}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYGZca{}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{ssigma}\PYG{o}{*}\PYG{n}{ttheta}\PYG{o}{/}\PYG{p}{(}\PYG{n}{ssigma}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{));}
+       \PYG{n}{Deno}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)=} \PYG{n}{lambda0}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}\PYG{o}{*}\PYG{n}{Nume}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{);}
+    \PYG{k}{end}
+    \PYG{n}{Den}\PYG{p}{(}\PYG{n}{j}\PYG{p}{)=}\PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{Deno}\PYG{p}{(:,}\PYG{n}{j}\PYG{p}{),}\PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{k}{for} \PYG{n}{i}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{2}
+        \PYG{c}{\PYGZpc{} Equation 22}
+       \PYG{n}{ff}\PYG{p}{(}\PYG{n}{ind}\PYG{p}{)=}\PYG{n}{lambda\PYGZus{}hat}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{Nume}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}\PYG{o}{/}\PYG{n}{Den}\PYG{p}{(}\PYG{n}{j}\PYG{p}{);}
+       \PYG{n}{ind}\PYG{p}{=}\PYG{n}{ind}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{end}
+\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}
