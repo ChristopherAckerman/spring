@@ -20,35 +20,89 @@
   \end{align*}
   This makes sense. The wage for high output needs to compensate the agent for his effort, but since high effort doesn't always produce high output and we don't directly observe effort, we need to overweight the compensation for high output to account for times when the agent exerts high effort but doesn't produce high output.
 
-\item Again we have $w_L = 0$, and we want to set $w_H$ such that
-  \[
-\E[ u \mid H] \ge \E[u \mid L].
-\]
-We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the probability of winning given high effort is $\frac{1}{2}$.
-\begin{align*}
-  \E[ w \mid a = H] &= \frac{1}{2} u(w_H) - c(H)\\
-  \E[u \mid a = L] &= \frac{1}{2}(1 - p) w_H\\
-  \intertext{Here the agent has a strictly positive expected utility from exerting effort $L$. If the agent plays $L$, there is a $1 - p$ chance that the other agent fails to produce high output, even if he is playing $H$. Given low output by both players, the principal still needs to pay \emph{somebody} the high wage, and our tie-breaking mechanism assigns this probability $\frac{1}{2}$. Now we can set these expected utilities equal to each other and solve for the optimal high wage.}
-  \frac{1}{2}(1 - p) u(w_H) &= \frac{1}{2} u(w_H) - c(H)\\
-  \implies w_H &= u^{-1} \left(\frac{2c(H)}{p}\right)\\
-  \intertext{To see that profits are lower under tournament pay, note that we can write the firm's profits in each case as}
-  \Pi_a &= q(H, H) - 2w_H - 0 w_L\\
-  \Pi_b &= q(H, H) - w_h - w_L\\
-  \intertext{Both pay schemes result in actions $H, H$ by the agents, so output is the same. In part (a) we pay both agents the high wage, but in part (b) one agent gets the high wage and one agent gets the low wage. Since $w_L = 0 $ in both cases, we can simplify the profit condition to}
-  2 \underbrace{u^{-1}\left(\frac{c(H)}{p}\right)}_{w_H (a)} &< \underbrace{u^{-1} \left(\frac{2c(H)}{p}\right)}_{w_H(b)}\\
-  \intertext{This inequality follows from the mathematical footnote in the problem set.}
-\end{align*}
-\item Again set $w_L = 0$, and suppose $a_{-i} = H$
+\item
+  We can break this problem into two steps. First, we can figure out how much higher $w_H$ must be relative to $w_L$ to make the agent indifferent between the two effort levels. Then, we can set absolute levels of $w_H$ and $w_L$ so that the IR constraint is just satisfied and the agent is indifferent between accepting the contract and taking the outside option. Assuming we fix a NE where the other player is playing $H$, then
   \begin{align*}
-    \p(\text{nobody has } q = 1) &= (1 - p)^2\\
-    \implies \p(\text{at least one person succeeds}) &= 1 - ((1 - p)^2)\\
-                                 &= 2p - p^2\\
-    \E[u \mid a = H] &= u(w_H)(2p - p^2) - c(H)\\
-    \E[u \mid a = L] &= u (p w_H)\\
-    u(w_H(2p-p^2)) - c(H) &= u(p w_H)\\
-    \implies w_H &= u^{-1} \left(\frac{c(H)}{p - \gr{p^2}}\right)\\
-    \intertext{Here the green term is an incentive to deviate to $a = L$ because there is still a chance to receive high wages if the other player exerts high effort, so $w_H$ must be higher to avoid shirking.}
+    \p(\text{win} \mid H, H) u(w_H) + \p(\text{lose} \mid H, H) u(w_L) - c &\ge \p(\text{win} \mid H, L) u(w_H) + (1 - \p(\text{win} \mid H, L)) u(w_L) \tag{IC}\\
+    \implies \frac{u(w_H)}{2} + \frac{u(w_L)}{2} - c &= \frac{1 - p}{2} u(w_H) + \frac{1 - p}{2} u(w_L) \\
+                                                                           &= 0\\
+    \p(\text{win} \mid H, H) u(w_H) + \p(\text{lose} \mid H, H) u (w_L) &\ge 0 \tag{IR}\\
+    \implies \frac{u(w_H)}{2} + \frac{u(w_L)}{2} &=c\\
+    \frac{u(w_H)}{2} + \frac{u(w_L)}{2} - c &= 0 \tag{IR 1}\\
+    \implies u(w_L) &= 2c - u(w_H)\\
+    (1 - p) u(w_H) &= (-1 - p) u(w_L) \tag{IR 2}\\
+    \implies u(w_H) &= \frac{c(1 + p)}{p}\\
+    w_H &= u^{-1} \left(\frac{c(1 + p)}{p}\right)\\
+    u(w_L) &= 2c - \frac{c(1 + p)}{p}\\
+    \implies w_L &= u^{-1}\left(\frac{c(p-1)}{p}\right)
   \end{align*}
+  % \begin{align*}
+  %   \E[u \mid a = H] &= \frac{1}{2} u(w_H) + \frac{1}{2} u(w_L) - c(H)\\
+  %   E[ u \mid a = L] &= \frac{1}{2}(1 - p) u(w_H) + \left(1 - \frac{1}{2} (1 - p)\right) u (w_L)\\
+  %   \frac{1}{2} u(w_H) + \frac{1}{2} u(w_L) - c(H) &= \frac{1}{2}(1 - p) u(w_H) + \left(1 - \frac{1}{2} (1 - p)\right) u (w_L)\\
+  %   \implies w_H &= w_L + u^{-1} \left(\frac{c(H)}{p}\right)\\
+  %   w_L &= w_H - u^{-1}\left(\frac{c(H)}{p}\right)
+  % \end{align*}
+  % Now we want to figure out the cheapest $\{w_H, w_L\}$ that still make the agent want to work.
+  % \begin{align*}
+  %   \E[u \mid \text{enter}] &= \E [u \mid \text{don't enter}]\\
+  %                           &= 0\\
+  %   \E[u \mid a = H] &= \E [u \mid a = L]\\
+  %                           &= \E[u \mid \text{enter}]\\
+  %   \implies \E[u \mid a = H] &= 0 \\
+  %   \iff 0 &= \frac{1}{2} u(w_H) + \frac{1}{2}(w_L) - c(H)\\
+  %   \implies w_L &= u^{-1}\left(\left(1 - \frac{1}{2p}\right) c(H)\right)
+  % \end{align*}
+  Both agents are playing $H$, so the output is the same in part (a) and part (b). To show that profit is lower in part (b), we just need to show that the wages paid to the agents are higher in part (b). Since the agents have the same outside option in both part (a) and part (b), the question is how much, in dollar terms, the principal must pay to set the expected utility of accepting a contract equal to zero. This means that both of the contracts must have the same expected value for the agent, in utility terms. In part (a) the only relevant term is $w_H$ because the agent always receives $w_H$, so the distribution is degenerate. In part (b), the agent receives $w_L$ half the time and $w_H$ half the time, so the contract in part (b) is a mean-preserving spread of the contract in part (a), in utility terms. But the agent is risk averse, so the principal must increase the high wage more, in dollar terms, than he decreases the low wage, so the expected dollar value of the contract in part (b) is higher than the dollar value of the contract in part (a), and the principal makes lower profits.
+%   Again we have $w_L = 0$, and we want to set $w_H$ such that
+%   \[
+% \E[ u \mid H] \ge \E[u \mid L].
+% \]
+% We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the probability of winning given high effort is $\frac{1}{2}$.
+% \begin{align*}
+%   \E[ w \mid a = H] &= \frac{1}{2} u(w_H) - c(H)\\
+%   \E[u \mid a = L] &= \frac{1}{2}(1 - p) w_H\\
+%   \intertext{Here the agent has a strictly positive expected utility from exerting effort $L$. If the agent plays $L$, there is a $1 - p$ chance that the other agent fails to produce high output, even if he is playing $H$. Given low output by both players, the principal still needs to pay \emph{somebody} the high wage, and our tie-breaking mechanism assigns this probability $\frac{1}{2}$. Now we can set these expected utilities equal to each other and solve for the optimal high wage.}
+%   \frac{1}{2}(1 - p) u(w_H) &= \frac{1}{2} u(w_H) - c(H)\\
+%   \implies w_H &= u^{-1} \left(\frac{2c(H)}{p}\right)\\
+%   \intertext{To see that profits are lower under tournament pay, note that we can write the firm's profits in each case as}
+%   \Pi_a &= q(H, H) - 2w_H - 0 w_L\\
+%   \Pi_b &= q(H, H) - w_h - w_L\\
+%   \intertext{Both pay schemes result in actions $H, H$ by the agents, so output is the same. In part (a) we pay both agents the high wage, but in part (b) one agent gets the high wage and one agent gets the low wage. Since $w_L = 0 $ in both cases, we can simplify the profit condition to}
+%   2 \underbrace{u^{-1}\left(\frac{c(H)}{p}\right)}_{w_H (a)} &< \underbrace{u^{-1} \left(\frac{2c(H)}{p}\right)}_{w_H(b)}\\
+%   \intertext{This inequality follows from the mathematical footnote in the problem set.}
+% \end{align*}
+\item
+  \begin{align*}
+    \p(w_H \mid H) u(w_H) + \p(w_L \mid L) u(w_L) - c &\ge \p(w_H \mid L) u(w_H) + \p (w_L \mid L) u(w_L)\\
+    \implies (1 - p)^2 u(w_H) + (1 - (1 - p)^2) u(w_L) - c &\ge p u(w_H) + (1 - p) u (w_L)\\
+    \intertext{At the optimal $w_L, w_H$ this holds with equality,}
+    \implies (1 - p)^2 u(w_H) + (1 - (1 - p)^2) u(w_L) - c &= p u(w_H) + (1 - p) u (w_L)\\
+    (1 - p)^2 u(w_H) + (1 - (1 - p)^2) u(w_L) - c &= 0 \tag{IR 1}\\
+    \implies u(w_H) &= \frac{c - (1 - (1 - p)^2) u(w_L)}{(1 - p)^2}\\
+    pu(w_H) + (1 - p) u(w_L) &= 0\tag{IR 2}\\
+    \implies u(w_H) &= u(w_L) - \frac{1}{p} u(w_L)\\
+    u(w_L) - \frac{1}{p} u(w_L) &= \frac{c - (1 - (1 - p)^2) u(w_L)}{(1 - p)^2}\\
+    (1 - p)^2 u(w_L) - \frac{(1 - p)^2}{p} u(w_L) &= c - (1 - (1 - p)^2) u(w_L)\\
+    (1 - 2p + p^2) u(w_L) - \frac{1 - 2p + p^2}{p} u(w_L) &= c - 2pu(w_L) + p^2 u(w_L)\\
+    u(w_L) - \frac{1}{p} u(w_L) + 2u(w_L) - pu(w_L) &= c\\
+    u(w_L) &= \frac{c}{3 - \frac{1}{p} - p}\\
+    w_L &= u^{-1} \left(\frac{c}{3 - \frac{1}{p} - p}\right)\\
+    u(w_H) &= u(w_L) - \frac{1}{p} u(w_L)\\
+                                                      &= \frac{c}{3 - \frac{1}{p} - p} - \frac{1}{p} \left(\frac{c}{3 - \frac{1}{p} - p}\right)\\
+    w_H &= u^{-1} \left((1 - \frac{1}{p})\left(\frac{c}{3 - \frac{1}{p} - p}\right)\right)
+  \end{align*}
+  % Again set $w_L = 0$, and suppose $a_{-i} = H$
+  % \begin{align*}
+  %   \p(\text{nobody has } q = 1) &= (1 - p)^2\\
+  %   \implies \p(\text{at least one person succeeds}) &= 1 - ((1 - p)^2)\\
+  %                                &= 2p - p^2\\
+  %   \E[u \mid a = H] &= u(w_H)(2p - p^2) - c(H)\\
+  %   \E[u \mid a = L] &= u (p w_H)\\
+  %   u(w_H(2p-p^2)) - c(H) &= u(p w_H)\\
+  %   \implies w_H &= u^{-1} \left(\frac{c(H)}{p - \gr{p^2}}\right)\\
+  %   \intertext{Here the green term is an incentive to deviate to $a = L$ because there is still a chance to receive high wages if the other player exerts high effort, so $w_H$ must be higher to avoid shirking.}
+  % \end{align*}
 \item Regardless of whether the NE is $\{H, H\}$ or $\{L, L\}$, each agent will win half of the time.
   \begin{align*}
     \E[u_i \mid H, H] &= u\left(\frac{1}{2} w_H\right) - u\left(\frac{1}{2} w_L\right) - c(H)\\
@@ -69,7 +123,7 @@ We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the 
 \newpage
 \section{Question 2}
 \begin{enumerate}[label=\alph*)]
-\item \rd{TODO}
+\item The competitive market means that all firms are making the same offers to the worker, so she never wants to quit and take an identical offer at another firm. On the other hand, since there's a competitive market no firm can make positive profits, since if one firm is making positive profits then another firm can offer slightly more compensation and take the worker away.
 \item Because there are competitive firms, we want to offer the agent their expected output each period so that expected profits are equal to $0$. In the first period we don't know anything about the agent, so their expected output is their expected type, which is $\frac{1}{2} 0 + \frac{1}{2} 2 = 1$, so $w_1 = 1$. In period $2$, we've seen output in period 1 so we perfectly know the agent's type. Since period 1 output is perfectly revealing about the agent's type, we can now write $w_2(y^1)$ as a function of the agent's type, and the zero-profit condition gives $w_2 = y_2 = \theta$. Therefore, the risk-neutral equilibrium wage offer is
   \[
 \{1, \theta\}.
@@ -111,9 +165,42 @@ where we're again offering expected output, but now discounting it by the probab
 w(s^t) = 2 \quad \forall t > t^\prime
   \]
   \end{enumerate}
+  The last step is to provide insurance by spreading the $1$ in the first period across all low periods, while maintaining the zero profit condition.
 \end{enumerate}
 \section{Question 3}
-\rd{TODO}
+\begin{enumerate}[label=\alph*)]
+\item $z$ satisfies the equation
+  \[
+u(w) + \delta U_+ = \frac{u(z)}{1 - \delta}
+\]
+\item
+  \begin{align*}
+    \Pi(u) &= \max_{\delta, U_+, w} \E[q - w + \delta \Pi (U_+)] \text{ s.t.}\\
+    \Pi_+ &\ge 0\\
+    u(w) + \delta U_+ &\ge \frac{u(z)}{1 - \delta}\\
+    u(w) &\ge 0\\
+    [u(w) + \delta U_+]F(z) &\ge U\\
+    \max_{z, U_+, w} &\ [q - w + \delta \Pi(U_+)] F(z)
+  \end{align*}
+\item
+  \begin{align*}
+    \mathcal{L} &= [q - w - \delta \Pi(U_+)]F(z) + \lambda \left[u(w) + \delta \Pi(U_+) - \frac{u(z)}{1 - \delta}\right] + \mu \left[[u(w) + \delta (U_+)] F(z) - U\right]\\
+    \intertext{FOCs:}
+    0 &= -F(z) + u^\prime(w)[\lambda + \mu F(z)] \tag{$w$}\\
+    \mu \left(\frac{u^\prime(z)}{1 - \delta}\right) &= [q - w + \delta \Pi(U_+)]f(z)\tag{$z$}\\
+    \mu &= \frac{f(z)(1 - \delta)}{u^\prime(z)}[q - w + \delta \Pi(U_+)]\\
+    0 &= \Pi^\prime (U_+) F(z) + [\lambda + \mu F(z)]\\
+    - \Pi^\prime (U_+) &= \frac{1}{u^\prime(w)}\\
+                &= \frac{\lambda + \mu F(z)}{F(z)}\\
+                &= \frac{\left[\frac{(1 - \delta)f(z)}{u^\prime(z)}(q - w + \delta \Pi(U_+)) + \mu F(z)\right]}{F(z)}\\
+                &= \frac{(1 - \delta)f(z)}{u^\prime(z) F(z)} (q - w + \delta \Pi(U_+)) + \mu\\
+    \intertext{Envelope condition:}
+    \Pi^\prime (u) &= - \mu\\
+    \frac{\Pi(u)}{F(z)} &= q - w - \delta \Pi(U_+)\\
+                &= \frac{(1 - \delta)f(z)}{^\prime(z) F(z)}\left(\frac{\Pi(u)}{F(z)}\right) - \Pi^\prime (u)\\
+    &= \frac{1 - \delta}{u^\prime(z)}\Pi(u) \frac{f(z)}{F(z)^2} - \Pi^\prime (u)
+  \end{align*}
+\end{enumerate}
 \section{Question 4}
 \begin{enumerate}[label=\alph*)]
 \item

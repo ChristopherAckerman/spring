@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.9)  11 MAY 2021 00:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.9)  12 MAY 2021 18:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -955,40 +955,40 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] (./ackerma
-n_hw2.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7] (.
+/ackerman_hw2.aux)
 Package rerunfilecheck Info: File `ackerman_hw2.out' has not changed.
 (rerunfilecheck)             Checksum: DDED10BED86ED4A4DFF9210BE9935E8A;180.
  ) 
 Here is how much of TeX's memory you used:
- 21634 strings out of 479383
- 398868 string characters out of 5875831
- 853546 words of memory out of 5000000
+ 21647 strings out of 479383
+ 398945 string characters out of 5875831
+ 858548 words of memory out of 5000000
  38270 multiletter control sequences out of 15000+600000
  418039 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,16n,88p,680b,594s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,16n,88p,1124b,604s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
-share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
-usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share
-/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fon
-ts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public
-/cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0
-800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist
-/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/cm-super/sfti1000.pfb>
-Output written on ackerman_hw2.pdf (5 pages, 215274 bytes).
+mmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/
+texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/font
+s/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm08
+00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfti1000.pfb>
+Output written on ackerman_hw2.pdf (7 pages, 223366 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
+ 165 PDF objects out of 1000 (max. 8388607)
+ 136 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
  45 words of extra memory for PDF output out of 10000 (max. 10000000)
 
