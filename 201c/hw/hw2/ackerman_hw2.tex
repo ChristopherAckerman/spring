@@ -64,14 +64,24 @@ We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the 
     \sum^\infty_{t = t^\prime} c(H) &> u\left(pw_H + \frac{1}{2} (1 - p)w_L + \frac{1}{2} (1 - p) w_H\right) 
   \end{align*}
   The undiscounted cost of high effort, the term on the left, is infinite, while the one-period benefit of deviating, the term on the right, is finite. Therefore $L, L$ is a SPNE for each subgame.
+  \item \rd{TODO}
 \end{enumerate}
 \newpage
 \section{Question 2}
 \begin{enumerate}[label=\alph*)]
 \item \rd{TODO}
-\item Because there are competitive firms, we want to offer the agent their expected output each period so that expected profits are equal to $0$. In the first period we don't know anything about the agent, so their expected output is their expected type, which is $\frac{1}{2} 0 + \frac{1}{2} 2 = 1$, so $w_1 = 1$. In period $2$, we've seen output in period 1 so we perfectly know the agent's type. Since period 1 output is perfectly revealing about the agent's type, we can now write $w_2(y^1)$ as a function of the agent's type, and the zero-profit condition gives $w_2 = y_2 = \theta$. Therefore, the equilibrium wage offer is
+\item Because there are competitive firms, we want to offer the agent their expected output each period so that expected profits are equal to $0$. In the first period we don't know anything about the agent, so their expected output is their expected type, which is $\frac{1}{2} 0 + \frac{1}{2} 2 = 1$, so $w_1 = 1$. In period $2$, we've seen output in period 1 so we perfectly know the agent's type. Since period 1 output is perfectly revealing about the agent's type, we can now write $w_2(y^1)$ as a function of the agent's type, and the zero-profit condition gives $w_2 = y_2 = \theta$. Therefore, the risk-neutral equilibrium wage offer is
   \[
 \{1, \theta\}.
+  \]
+  But now we want to insure the agent against (some) of the probability that they will be a low type. We still need to pay them $w = \theta = 2$ when they are high type, but we can spread the compensation between the first period and the low-type second period. To maintain the zero profit condition, we can take $\varepsilon$ away from first-period pay and add $2 \varepsilon$ to second-period pay when the agent has low time (which only happens half the time). The optimal insurance yields
+  \[
+    \left\{\frac{2}{3}, 
+        \begin{array}{ll}
+          2 &\text{if } \theta = 2\\
+          \frac{2}{3} &\text{if } \theta = 0
+        \end{array}
+      \right\}
   \]
 \item Here we again want to write a contract based on the agent's type, but the information structure is different. Seeing $y = 4$ is perfectly informative about the agent's type, but seeing $y = 0$ is not. The more we see $y = 0$, the more likely it is that the agent is type $\theta = 0$. Using Bayes rule, we can write $\p(\theta = t \mid y^t)$ as
   \begin{align*}
@@ -93,7 +103,7 @@ We can fix a Nash Equilibrium with actions $(H, H)$, so that in equilibrium the 
   \end{align*}
 \item If we see output $0$ in the first period, or more generally if we see a vector of zeroes of length $t$, then we start to think that the agent is \emph{probably} type $\theta = 0$, but we can't be sure. So we want to reduce their compensation to account for the increased probability they're low-type. Formally, for any history $s^t$ where $y_t = 0 \forall  t^\prime < t$, we offer the wage
   \[
-w(y(s^t)) = 2 \cdot \frac{1}{3},
+w(y(s^t)) = 2 \cdot \frac{1}{3^t},
 \]
 where we're again offering expected output, but now discounting it by the probability that the agent is actually high type.
 \item Finally, the observation $y_t = 4$ is perfectly information and unambiguously tells us that $\theta =2$. Therefore, if we see $y = 4$ for some $t^\prime$, then
@@ -101,5 +111,25 @@ where we're again offering expected output, but now discounting it by the probab
 w(s^t) = 2 \quad \forall t > t^\prime
   \]
   \end{enumerate}
+\end{enumerate}
+\section{Question 3}
+\rd{TODO}
+\section{Question 4}
+\begin{enumerate}[label=\alph*)]
+\item
+  \begin{align*}
+    \E[U^I \mid \theta] &= \E[y - t \mid \theta]\\
+    &\ge \E[U^{NI} \mid \theta ]\\
+                        &= \theta \\
+    \E[y - t(y, \tilde{\theta}) \mid \hat{\theta}] &\ge \theta\\
+    \intertext{for some $\hat{\theta}$}
+    \implies \E[y \mid \hat{\theta}] - t(y, \tilde{\theta}) &\ge \\
+    \iff \E[v] &\ge \E[t(y, \tilde{\theta}) \mid \hat{\theta}].\\
+    \intertext{This equation holds with equality at $\hat{\theta}$, since $\hat{\theta}$ is the largest $\theta$ where it is true. We now want to show}
+    \E[v] &\ge \E[t(y, \tilde{\theta}) \mid \theta^\prime < \hat{\theta}]\\
+    \iff \E[ t(y, \tilde{\theta}) \mid \hat{\theta}] &\ge \E[t(y, \tilde{\theta}) \mid \theta^\prime] \\
+    \equiv \int f_{y \mid \hat{\theta}} t(y, \tilde{\theta})dy &\ge \int f_{y \mid \theta^\prime} t(y, \tilde{\theta})
+  \end{align*}
+  MLRP implies that this inequality is always true, so any $\theta^\prime < \hat{\theta}$, all the way down to $\underline{\theta}$, wants to invest.
 \end{enumerate}
 \end{document}
