@@ -118,7 +118,16 @@
     \sum^\infty_{t = t^\prime} c(H) &> u\left(pw_H + \frac{1}{2} (1 - p)w_L + \frac{1}{2} (1 - p) w_H\right) 
   \end{align*}
   The undiscounted cost of high effort, the term on the left, is infinite, while the one-period benefit of deviating, the term on the right, is finite. Therefore $L, L$ is a SPNE for each subgame.
-  \item \rd{TODO}
+\item
+  All the subgames are the same, so check the conditions on $w_L$ and $w_H$ that make playing $H$ at least as good as playing $L$.
+  \begin{align*}
+    \sum^\infty_{t = t^\prime} (1 - p^2) u(w_H) + (1 - (1 - p)^2) u(w_L) - c &\ge \sum^\infty_{t = t^\prime} p u(w_H) + (1 - p) u(w_L)\\
+    \iff \sum^\infty_{t = t^\prime} u(w_H) - 2p u(w_H) + p^2 u(w_H) + (+ 2p - p^2) u(w_L) - p u(w_H) - (1 - p) u(w_L) &\ge c\\
+    \implies (1 - 3p + p^2) u(w_H) + (-1 + 3p - p^2) u(w_L) &=c\\
+    \left(\frac{c + (1 - 3p + p^2) u(w_L)}{1 - 3p + p^2}\right) &= u(w_H)\\
+    \implies u^{-1} \left(\frac{c + (1 - 3p + p^2) u(w_L)}{1 - 3p + p^2}\right) &= w_H\\
+    u^{-1} \left(\frac{c + (-1 + 3p - p^2) u(w_H)}{-1 + 3p - p^2}\right) &= w_L
+  \end{align*}
 \end{enumerate}
 \newpage
 \section{Question 2}
@@ -165,7 +174,7 @@ where we're again offering expected output, but now discounting it by the probab
 w(s^t) = 2 \quad \forall t > t^\prime
   \]
   \end{enumerate}
-  The last step is to provide insurance by spreading the $1$ in the first period across all low periods, while maintaining the zero profit condition.
+  The last step is to provide insurance by spreading the $1$ in the first period across all low periods, while maintaining the zero profit condition. With optimal risk sharing, each firm will offer $\frac{3}{4}$ in ever period until they see high output, and then $2$ in each period after they see high output.
 \end{enumerate}
 \section{Question 3}
 \begin{enumerate}[label=\alph*)]

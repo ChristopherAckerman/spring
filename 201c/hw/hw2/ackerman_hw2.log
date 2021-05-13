@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.9)  12 MAY 2021 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.9)  12 MAY 2021 20:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -955,8 +955,12 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7] (.
-/ackerman_hw2.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+Overfull \hbox (59.8562pt too wide) detected at line 130
+[]
+ []
+
+[4] [5] [6] [7] (./ackerman_hw2.aux)
 Package rerunfilecheck Info: File `ackerman_hw2.out' has not changed.
 (rerunfilecheck)             Checksum: DDED10BED86ED4A4DFF9210BE9935E8A;180.
  ) 
@@ -985,7 +989,7 @@ cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm08
 are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
 fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/cm-super/sfti1000.pfb>
-Output written on ackerman_hw2.pdf (7 pages, 223366 bytes).
+Output written on ackerman_hw2.pdf (7 pages, 224398 bytes).
 PDF statistics:
  165 PDF objects out of 1000 (max. 8388607)
  136 compressed objects within 2 object streams
